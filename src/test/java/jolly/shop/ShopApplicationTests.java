@@ -1,10 +1,10 @@
-package jolly.board;
+package jolly.shop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BoardApplicationTests {
+class ShopApplicationTests {
 
 	@Test
 	void contextLoads() {
