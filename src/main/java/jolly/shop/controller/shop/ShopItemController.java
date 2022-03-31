@@ -2,13 +2,13 @@ package jolly.shop.controller.shop;
 
 import jolly.shop.domain.Item;
 import jolly.shop.repository.ItemRepository;
+import jolly.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor // final이 붙은 필드를 모아 생성자를 생성해줌
@@ -16,6 +16,7 @@ import java.util.Optional;
 public class ShopItemController {
 
     private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     @GetMapping("/add")
     public String addForm() {
@@ -27,13 +28,16 @@ public class ShopItemController {
         return "shop/items";
     }
 
-    @GetMapping("/edit")
-    public String editForm() {
+    @GetMapping("/items/{itemId}/edit")
+    public String editForm(Model model, @PathVariable Long itemId) {
+        Item item = itemRepository.findById(itemId).orElse(null);
+        model.addAttribute("item", item);
         return "shop/editForm";
     }
 
-    @PostMapping("/edit")
-    public String edit() {
+    @PostMapping("/items/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+        itemService.update(item, itemId);
         return "shop/item";
     }
 
