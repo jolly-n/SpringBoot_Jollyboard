@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor // final이 붙은 필드를 모아 생성자를 생성해줌
-@RequestMapping("/shop")
+@RequestMapping("/shop/items")
 public class ShopItemController {
 
     private final ItemRepository itemRepository;
@@ -24,31 +24,32 @@ public class ShopItemController {
     }
 
     @PostMapping("/add")
-    public String add() {
-        return "shop/items";
+    public String add(@ModelAttribute Item item) {
+        itemRepository.save(item);
+        return "redirect:/shop/items";
     }
 
-    @GetMapping("/items/{itemId}/edit")
+    @GetMapping("/{itemId}/edit")
     public String editForm(Model model, @PathVariable Long itemId) {
         Item item = itemRepository.findById(itemId).orElse(null);
         model.addAttribute("item", item);
         return "shop/editForm";
     }
 
-    @PostMapping("/items/{itemId}/edit")
+    @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
         itemService.update(item, itemId);
-        return "shop/item";
+        return "redirect:/shop/items/{itemId}";
     }
 
-    @GetMapping("/items")
+    @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
         return "shop/items";
     }
 
-    @GetMapping("/items/{itemId}")
+    @GetMapping("/{itemId}")
     public String item(Model model, @PathVariable Long itemId) {
         Item item = itemRepository.findById(itemId).orElse(null);
         model.addAttribute("item", item);
