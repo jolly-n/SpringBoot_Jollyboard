@@ -5,11 +5,10 @@ import jolly.shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor // final이 붙은 필드를 모아 생성자를 생성해줌
@@ -45,8 +44,10 @@ public class ShopItemController {
         return "shop/items";
     }
 
-    @GetMapping("/item")
-    public String item() {
+    @GetMapping("/items/{itemId}")
+    public String item(Model model, @PathVariable Long itemId) {
+        Item item = itemRepository.findById(itemId).orElse(null);
+        model.addAttribute("item", item);
         return "shop/item";
     }
 
