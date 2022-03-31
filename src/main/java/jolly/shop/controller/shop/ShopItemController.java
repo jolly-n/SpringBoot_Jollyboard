@@ -1,13 +1,22 @@
-package jolly.shop.controller;
+package jolly.shop.controller.shop;
 
+import jolly.shop.domain.Item;
+import jolly.shop.repository.ItemRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
+@RequiredArgsConstructor // final이 붙은 필드를 모아 생성자를 생성해줌
 @RequestMapping("/shop")
-public class ShopController {
+public class ShopItemController {
+
+    private final ItemRepository itemRepository;
 
     @GetMapping("/add")
     public String addForm() {
@@ -30,7 +39,9 @@ public class ShopController {
     }
 
     @GetMapping("/items")
-    public String items() {
+    public String items(Model model) {
+        List<Item> items = itemRepository.findAll();
+        model.addAttribute("items", items);
         return "shop/items";
     }
 

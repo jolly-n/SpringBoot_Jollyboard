@@ -35,6 +35,7 @@
             </div>
         </div>
         <hr class="my-4">
+        <div class="mb-3">총 상품수 : <span th:text="${#lists.size(items)}">5</span></div>
         <div>
             <table class="table">
                 <thead>
@@ -46,11 +47,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><a href="item.html" th:href="@{/shop/item}">상품id</a></td>
-                    <td><a href="item.html" th:href="@{/shop/item}">상품명</a></td>
-                    <td>10000</td>
-                    <td>10</td>
+                <tr th:each="item : ${items}">
+                    <td><a href="item.html" th:href="@{/shop/item}" th:text="${item.id}">상품id</a></td>
+                    <td><a href="item.html" th:href="@{/shop/item}" th:text="${item.name}">상품명</a></td>
+                    <td th:text="${item.price}">10000</td>
+                    <td th:text="${item.quantity}">10</td>
                 </tr>
                 </tbody>
             </table>
