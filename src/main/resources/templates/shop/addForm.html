@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="pricing.css" rel="stylesheet">
+    <link href="pricing.css" th:href="@{/css/pricing.css}" rel="stylesheet">
 
     <title>게시물 작성</title>
 </head>
@@ -33,8 +33,7 @@
             </div>
             <div class="mb-2">
                 <label for="price">가격</label>
-                <input type="text" id="price" name="price" class="form-control"
-                       placeholder="가격을 입력하세요">
+                <input type="text" id="price" name="price" class="form-control" placeholder="가격을 입력하세요">
             </div>
             <div class="mb-2">
                 <label for="quantity">수량</label>
@@ -43,8 +42,7 @@
             <hr class="my-4">
             <div class="row">
                 <div class="col">
-                    <button class="w-100 btn btn-info btn-lg" type="submit">상품 등록
-                    </button>
+                    <button class="w-100 btn btn-info btn-lg" type="submit">상품 등록</button>
                 </div>
                 <div class="col">
                     <button class="w-100 btn btn-secondary btn-lg"

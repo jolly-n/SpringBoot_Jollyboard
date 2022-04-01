@@ -7,10 +7,11 @@ html {
     }
 }
 
-.pricing-header {
+.container {
     max-width: 700px;
 }
 
-.container {
-    max-width: 560px;
+.page {
+    width: 200px;
+    margin: 0 auto;
 }

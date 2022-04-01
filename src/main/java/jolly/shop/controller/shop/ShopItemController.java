@@ -4,11 +4,12 @@ import jolly.shop.domain.Item;
 import jolly.shop.repository.ItemRepository;
 import jolly.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor // final이 붙은 필드를 모아 생성자를 생성해줌
@@ -43,8 +44,12 @@ public class ShopItemController {
     }
 
     @GetMapping
-    public String items(Model model) {
-        List<Item> items = itemRepository.findAll();
+    public String items(Model model, @PageableDefault(size = 5) Pageable pageable) { // 5개씩 페이징 처리
+        Page<Item> items = itemRepository.findAll(pageable);
+        int startPage = Math.max(1, items.getPageable().getPageNumber() - 3);
+        int endPage = Math.min(items.getPageable().getPageNumber() + 3, items.getTotalPages());
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
         model.addAttribute("items", items);
         return "shop/items";
     }
