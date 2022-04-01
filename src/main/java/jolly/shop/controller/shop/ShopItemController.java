@@ -44,8 +44,10 @@ public class ShopItemController {
     }
 
     @GetMapping
-    public String items(Model model, @PageableDefault(size = 5) Pageable pageable) { // 5개씩 페이징 처리
-        Page<Item> items = itemRepository.findAll(pageable);
+    public String items(Model model, @PageableDefault(size = 5) Pageable pageable, // 5개씩 페이징 처리
+                        @RequestParam(required = false, defaultValue = "") String searchText) {
+        // Page<Item> items = itemRepository.findAll(pageable);
+        Page<Item> items = itemRepository.findByNameContaining(pageable, searchText);
         int startPage = Math.max(1, items.getPageable().getPageNumber() - 3);
         int endPage = Math.min(items.getPageable().getPageNumber() + 3, items.getTotalPages());
         model.addAttribute("startPage", startPage);
