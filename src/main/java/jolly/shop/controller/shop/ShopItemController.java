@@ -56,4 +56,10 @@ public class ShopItemController {
         return "shop/item";
     }
 
+    @PostMapping("/{itemId}")
+    public String delete(@PathVariable Long itemId) {
+        itemRepository.deleteById(itemId);
+        return "redirect:/shop/items";
+    }
+
 }
