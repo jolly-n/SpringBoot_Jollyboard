@@ -1,0 +1,22 @@
+
+.form-login {
+    /*width: 100%;*/
+    max-width: 700px;
+    padding: 15px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content: center;
+}
+
+.form-login input[type="password"] {
+    margin: 10px 0px 10px 0px;
+    width: 350px;
+}
+
+.form-login input[type="text"] {
+     margin: 10px 0px 10px 0px;
+     width: 350px;
+ }

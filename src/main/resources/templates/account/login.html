@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 반응형 뷰포트 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/account.css}" rel="stylesheet">
+
+    <title>로그인</title>
+</head>
+
+<body>
+    <!-- 상단바 -->
+    <div th:replace="fragments/common :: menu"></div>
+
+    <!-- 바디 -->
+    <div class="form-login">
+        <form>
+            <h1 class="h3 mb-4 fw-normal text-center">로그인</h1>
+            <div class="inputBox">
+                <input type="email" class="form-control" placeholder="name@example.com">
+            </div>
+            <div class="inputBox">
+                <input type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="w-100 btn btn-lg btn-info" type="submit">Login</button>
+                </div>
+                <div class="col">
+                    <a class="w-100 btn btn-lg btn-secondary" th:href="@{/account/signup}">회원 가입</a>
+                </div>
+            </div>
+        </form>
+    </div> <!-- /container -->
+</body>
+
+</html>
