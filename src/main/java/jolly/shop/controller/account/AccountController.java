@@ -2,6 +2,7 @@ package jolly.shop.controller.account;
 
 import jolly.shop.domain.User;
 import jolly.shop.repository.UserRepository;
+import jolly.shop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class AccountController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/login")
-    public String login() {
+    public String loginForm() {
         return "/account/login";
     }
 
@@ -30,7 +31,7 @@ public class AccountController {
 
     @PostMapping("/signup")
     public String signup(@ModelAttribute User user) {
-        userRepository.save(user);
+        userService.save(user);
         return "redirect:/";
     }
 

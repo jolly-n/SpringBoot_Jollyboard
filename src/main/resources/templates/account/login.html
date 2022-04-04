@@ -22,13 +22,19 @@
 
     <!-- 바디 -->
     <div class="form-login">
-        <form>
+        <form th:action method="post">
             <h1 class="h3 mb-4 fw-normal text-center">로그인</h1>
-            <div class="inputBox">
-                <input type="email" class="form-control" placeholder="name@example.com">
+            <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div class="alert alert-info" role="alert" th:if="${param.logout}">
+                You have been logged out.
             </div>
             <div class="inputBox">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="email" class="form-control" name="email" placeholder="name@example.com">
+            </div>
+            <div class="inputBox">
+                <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
             <div class="row">
                 <div class="col">
