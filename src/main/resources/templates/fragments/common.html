@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -25,7 +26,12 @@
                 <a class="p-2 text-dark" href="/">home</a>
                 <a class="p-2 text-dark" href="/shop/items">shop</a>
             </nav>
-            <a class="btn btn-outline-info" th:href="@{/account/login}">Login</a>
+            <!-- login : 로그인이 되지 않은 사용자만 표시 -->
+            <a class="btn btn-outline-info" th:href="@{/account/login}" sec:authorize="!isAuthenticated()">Login</a>
+            <!-- logout : 로그인 된 사용자만 표시 -->
+            <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                <button class="btn btn-outline-info" type="submit">Logout</button>
+            </form>
         </div>
     </div>
 </body>
